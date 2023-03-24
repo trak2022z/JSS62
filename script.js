@@ -6,21 +6,19 @@
     equation();
   }
 
-  function getTwo() {
-    let newNum = 0;
-
-    setTimeout(() => {
-        newNum = 2;
-    }, 2000);
-
-    return newNum;
-  }
-
   function equation() {
     let one = 1;
-    let two = getTwo();
+    let two = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(2)
+      }, 2000);
+    });
 
-    id("answer").textContent = one + two;
+    two
+      .then((res) => {
+        id("answer").textContent = (one + res);
+      })
+
   }
 
   /********* HELPER FUNCTIONS **********/
